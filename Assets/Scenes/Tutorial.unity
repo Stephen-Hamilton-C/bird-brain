@@ -273,7 +273,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!61 &494916738
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -10038,38 +10038,6 @@ PrefabInstance:
     - target: {fileID: 1060944275316220868, guid: 492dae67c02a18c888e3e7e878e17784, type: 3}
       propertyPath: _sceneName
       value: Level 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2792448690999141001, guid: 492dae67c02a18c888e3e7e878e17784, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2792448690999141001, guid: 492dae67c02a18c888e3e7e878e17784, type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2792448690999141001, guid: 492dae67c02a18c888e3e7e878e17784, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 200
-      objectReference: {fileID: 0}
-    - target: {fileID: 2792448690999141001, guid: 492dae67c02a18c888e3e7e878e17784, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -222
-      objectReference: {fileID: 0}
-    - target: {fileID: 6413401694826143347, guid: 492dae67c02a18c888e3e7e878e17784, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6413401694826143347, guid: 492dae67c02a18c888e3e7e878e17784, type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6413401694826143347, guid: 492dae67c02a18c888e3e7e878e17784, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 200
-      objectReference: {fileID: 0}
-    - target: {fileID: 6413401694826143347, guid: 492dae67c02a18c888e3e7e878e17784, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -78
       objectReference: {fileID: 0}
     - target: {fileID: 8996091044250913327, guid: 492dae67c02a18c888e3e7e878e17784, type: 3}
       propertyPath: m_Name
