@@ -6,6 +6,7 @@ TagManager:
   tags:
   - PlayerCrouchCollider
   - Door
+  - Platform
   layers:
   - Default
   - TransparentFX

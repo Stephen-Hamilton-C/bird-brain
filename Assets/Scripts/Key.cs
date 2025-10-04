@@ -7,12 +7,14 @@ public class Key : MonoBehaviour
     
     private void OnTriggerEnter2D(Collider2D other)
     {
+        if (other.isTrigger) return;
         var player = other.FindPlayer();
         if (!player) return;
         if (player.HasKey) return;
         
         player.HasKey = true;
         OnPickedUp.Invoke();
+        // lol
         Destroy(gameObject);
     }
 }

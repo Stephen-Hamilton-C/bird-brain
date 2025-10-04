@@ -23,6 +23,7 @@ public class CharacterController2D : MonoBehaviour
 	private bool m_FacingRight = true;  // For determining which way the player is currently facing.
 	public Vector3 Velocity => m_Velocity;
 	private Vector3 m_Velocity = Vector3.zero;
+	public Vector3 PlatformVelocity;
 
 	[Header("Events")]
 	[Space]
@@ -56,6 +57,8 @@ public class CharacterController2D : MonoBehaviour
 		Collider2D[] colliders = Physics2D.OverlapCircleAll(m_GroundCheck.position, k_GroundedRadius, m_WhatIsGround);
 		for (int i = 0; i < colliders.Length; i++)
 		{
+			if (colliders[i].isTrigger) continue;
+			if (colliders[i].gameObject == gameObject) continue;
 			if (colliders[i].gameObject != gameObject)
 			{
 				m_Grounded = true;
@@ -80,9 +83,14 @@ public class CharacterController2D : MonoBehaviour
 		if (!crouch)
 		{
 			// If the character has a ceiling preventing them from standing up, keep them crouching
-			if (Physics2D.OverlapCircle(m_CeilingCheck.position, k_CeilingRadius, m_WhatIsGround))
+			var ceilingColliders = Physics2D.OverlapCircleAll(m_CeilingCheck.position, k_CeilingRadius, m_WhatIsGround);
+			foreach (var ceilingCollider in ceilingColliders)
 			{
-				crouch = true;
+				if (!ceilingCollider.isTrigger && ceilingCollider.gameObject != gameObject)
+				{
+					crouch = true;
+					break;
+				}
 			}
 		}
 
@@ -125,7 +133,7 @@ public class CharacterController2D : MonoBehaviour
 			// Move the character by finding the target velocity
 			Vector3 targetVelocity = new Vector2(move * 10f, m_Rigidbody2D.velocity.y);
 			// And then smoothing it out and applying it to the character
-			m_Rigidbody2D.velocity = Vector3.SmoothDamp(m_Rigidbody2D.velocity, targetVelocity, ref m_Velocity, m_MovementSmoothing);
+			m_Rigidbody2D.velocity = Vector3.SmoothDamp(m_Rigidbody2D.velocity, targetVelocity, ref m_Velocity, m_MovementSmoothing) + PlatformVelocity;
 
 			// If the input is moving the player right and the player is facing left...
 			if (move > 0 && !m_FacingRight)
