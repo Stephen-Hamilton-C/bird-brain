@@ -1,7 +1,10 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
+using Random = UnityEngine.Random;
 
 [RequireComponent(typeof(AudioSource))]
 [RequireComponent(typeof(CharacterController2D))]
@@ -10,9 +13,12 @@ public class Player : MonoBehaviour
     private static readonly int Walking = Animator.StringToHash("Walking");
     [SerializeField] private float _minimumY = -11;
     [SerializeField] private Animator _anim;
+    [SerializeField] private AudioClip[] _jumpSounds;
+    [SerializeField] private AudioSource _jumpAudioSource;
     private AudioSource _audioSource;
     private CharacterController2D _controller;
     private SpringJoint2D _spring;
+    private readonly HashSet<AudioClip> _previousJumpSounds = new();
     
     public bool HasKey
     {
@@ -60,6 +66,21 @@ public class Player : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
+    public void PlayJumpSound()
+    {
+        var availableSounds = _jumpSounds.Where(sound => !_previousJumpSounds.Contains(sound)).ToArray();
+        var selectedSoundIdx = Random.Range(0, availableSounds.Length);
+        var selectedSound = availableSounds[selectedSoundIdx];
+        _previousJumpSounds.Add(selectedSound);
+
+        if (_previousJumpSounds.Count == _jumpSounds.Length)
+        {
+            _previousJumpSounds.Clear();
+        }
+        
+        _jumpAudioSource.PlayOneShot(selectedSound);
+    }
+
     private static Vector2 GetBestContactPoint(ContactPoint2D[] contacts)
     {
         foreach (var contact in contacts)
@@ -77,15 +98,15 @@ public class Player : MonoBehaviour
     {
         if (!other.gameObject.CompareTag("Platform")) return;
         DestroySpring();
-        var contactPoint = GetBestContactPoint(other.contacts);
-        if (contactPoint == Vector2.zero) return;
-        
-        _spring = gameObject.AddComponent<SpringJoint2D>();
-        _spring.enableCollision = true;
-        _spring.autoConfigureConnectedAnchor = false;
-        _spring.connectedBody = other.gameObject.GetComponent<Rigidbody2D>();
-        _spring.connectedAnchor = transform.InverseTransformPoint(contactPoint);
-        _spring.distance = 0f;
+        // var contactPoint = GetBestContactPoint(other.contacts);
+        // if (contactPoint == Vector2.zero) return;
+        //
+        // _spring = gameObject.AddComponent<SpringJoint2D>();
+        // _spring.enableCollision = true;
+        // _spring.autoConfigureConnectedAnchor = false;
+        // _spring.connectedBody = other.gameObject.GetComponent<Rigidbody2D>();
+        // _spring.connectedAnchor = transform.InverseTransformPoint(contactPoint);
+        // _spring.distance = 0f;
     }
 
     private void OnCollisionStay2D(Collision2D other)

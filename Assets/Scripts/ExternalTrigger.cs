@@ -6,6 +6,10 @@ public class ExternalTrigger : MonoBehaviour
     public UnityEvent<Collider2D> OnTriggerEnter;
     public UnityEvent<Collider2D> OnTriggerStay;
     public UnityEvent<Collider2D> OnTriggerExit;
+    
+    public UnityEvent<Collision2D> OnColliderEnter;
+    public UnityEvent<Collision2D> OnColliderStay;
+    public UnityEvent<Collision2D> OnColliderExit;
 
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -20,5 +24,20 @@ public class ExternalTrigger : MonoBehaviour
     private void OnTriggerExit2D(Collider2D other)
     {
         OnTriggerExit?.Invoke(other);
+    }
+
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        OnColliderEnter?.Invoke(other);
+    }
+
+    private void OnCollisionStay2D(Collision2D other)
+    {
+        OnColliderStay?.Invoke(other);
+    }
+
+    private void OnCollisionExit2D(Collision2D other)
+    {
+        OnColliderExit?.Invoke(other);
     }
 }
