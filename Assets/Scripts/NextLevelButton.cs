@@ -7,12 +7,7 @@ public class NextLevelButton : MonoBehaviour
 {
     [SerializeField] private string _sceneName;
 
-    private void Start()
-    {
-        GetComponent<Button>().onClick.AddListener(ButtonClicked);
-    }
-
-    private void ButtonClicked()
+    public void NextLevel()
     {
         SceneManager.LoadScene(_sceneName);
     }

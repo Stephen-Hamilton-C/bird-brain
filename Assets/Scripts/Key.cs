@@ -14,7 +14,6 @@ public class Key : MonoBehaviour
         
         player.HasKey = true;
         OnPickedUp.Invoke();
-        // lol
         Destroy(gameObject);
     }
 }

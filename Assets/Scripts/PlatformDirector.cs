@@ -1,4 +1,4 @@
-using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
@@ -13,7 +13,8 @@ public class PlatformDirector : MonoBehaviour
     public float Speed = 1;
     public bool Direction = true;
     public LoopType _loopType = LoopType.Linear;
-    [SerializeField] private Transform[] _positions;
+    [SerializeField] private List<Transform> _positions = new();
+    [SerializeField] private bool _includeCurrentPosition;
     [SerializeField] private float _tolerance = 0.05f;
 
     private int _desiredPositionIdx;
@@ -25,32 +26,34 @@ public class PlatformDirector : MonoBehaviour
     private void Start()
     {
         _rb = GetComponent<Rigidbody2D>();
+        if (_includeCurrentPosition)
+        {
+            var startPos = new GameObject(gameObject.name + "_startpos");
+            startPos.transform.SetParent(null);
+            startPos.transform.position = transform.position;
+            _positions.Insert(0, startPos.transform);
+        }
     }
 
     private void SetNextPosition()
     {
         if (_loopType == LoopType.Linear)
         {
-            _desiredPositionIdx = (_desiredPositionIdx + DirectionInt) % _positions.Length;
+            _desiredPositionIdx = (_desiredPositionIdx + DirectionInt) % _positions.Count;
         }
         else if (_loopType == LoopType.PingPong)
         {
             _desiredPositionIdx += DirectionInt;
-            if (_desiredPositionIdx >= _positions.Length - 1 || _desiredPositionIdx <= 0)
+            if (_desiredPositionIdx >= _positions.Count - 1 || _desiredPositionIdx <= 0)
                 Direction = !Direction;
         }
 
         _rb.velocity = (DesiredPosition - transform.position).normalized * Speed;
-        
-        if (_playerRb)
-        {
-            // _playerRb.GetComponent<CharacterController2D>().PlatformVelocity = new Vector2(_rb.velocity.x, 0);
-        }
     }
 
     private void FixedUpdate()
     {
-        if (_positions.Length == 0) return;
+        if (_positions.Count == 0) return;
         
         if (Vector3.Distance(DesiredPosition, transform.position) <= _tolerance)
         {
@@ -58,25 +61,5 @@ public class PlatformDirector : MonoBehaviour
         }
         
         _rb.velocity = (DesiredPosition - transform.position).normalized * Speed;
-    }
-
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        var player = other.FindPlayer();
-        if(!player) return;
-
-        // _playerRb = player.GetComponent<Rigidbody2D>();
-        // _playerRb.GetComponent<CharacterController2D>().PlatformVelocity = new Vector2(_rb.velocity.x, 0);
-        // player.transform.SetParent(transform);
-    }
-
-    private void OnTriggerExit2D(Collider2D other)
-    {
-        var player = other.FindPlayer();
-        if(!player) return;
-
-        // _playerRb.GetComponent<CharacterController2D>().PlatformVelocity = Vector2.zero;
-        // _playerRb = null;
-        // player.transform.SetParent(null);
     }
 }

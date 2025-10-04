@@ -100,7 +100,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    private void OnTriggerExit2D(Collider2D other)
+    public void OnExternalTriggerExit2D(Collider2D other)
     {
         if(!other.gameObject.CompareTag("Platform")) return;
         DestroySpring();

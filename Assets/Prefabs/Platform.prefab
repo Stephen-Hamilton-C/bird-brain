@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2775203791563101915}
   - component: {fileID: 106092977930813681}
   - component: {fileID: 7785291822747644862}
+  - component: {fileID: 2796456540006234390}
   m_Layer: 0
   m_Name: Platform
   m_TagString: Platform
@@ -175,4 +176,19 @@ MonoBehaviour:
   Direction: 1
   _loopType: 1
   _positions: []
+  _includeCurrentPosition: 0
   _tolerance: 0.05
+--- !u!114 &2796456540006234390
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1587472483208914746}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32288949300dfeff68b0d8e07966aa3d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _groundSprite: {fileID: -31060102, guid: b7ec14c8c45747ae99ae7e5067ff49d6, type: 3}
+  _lavaSprite: {fileID: 201201872, guid: b7ec14c8c45747ae99ae7e5067ff49d6, type: 3}
