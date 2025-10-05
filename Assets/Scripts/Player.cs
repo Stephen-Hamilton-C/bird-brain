@@ -19,6 +19,7 @@ public class Player : MonoBehaviour
     private CharacterController2D _controller;
     private SpringJoint2D _spring;
     private readonly HashSet<AudioClip> _previousJumpSounds = new();
+    private bool _dead;
     
     public bool HasKey
     {
@@ -31,6 +32,7 @@ public class Player : MonoBehaviour
     private bool _hasKey;
     
     public UnityEvent<bool> OnHasKeyChanged = new();
+    public UnityEvent OnDeath = new();
 
     private void Start()
     {
@@ -61,9 +63,16 @@ public class Player : MonoBehaviour
         }
     }
 
-    public void Kill()
+    public void ReloadScene()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    public void Kill()
+    {
+        if(_dead) return;
+        _dead = true;
+        OnDeath?.Invoke();
     }
 
     public void PlayJumpSound()
