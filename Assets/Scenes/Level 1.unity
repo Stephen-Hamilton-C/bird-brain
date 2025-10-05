@@ -10048,9 +10048,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _groundTilemapObj: {fileID: 547037387}
-  _groundTile: {fileID: 11400000, guid: 9129a38f8e8fc977eadb954ae3db643a, type: 2}
+  _groundTile: {fileID: 11400000, guid: 59babbe194b56e02ebd005e8f5380f4e, type: 2}
   _groundOffset: {x: -20, y: -20}
-  _lavaTile: {fileID: 11400000, guid: 0b3d151b1930313088b66c34f016c71e, type: 2}
+  _lavaTile: {fileID: 11400000, guid: 8406c9b3c6ec935adb28f8df4eee1b1b, type: 2}
   _lavaTilemapObj: {fileID: 675172447}
   _lavaOffset: {x: -19, y: -20}
 --- !u!1 &604947709
@@ -10654,6 +10654,10 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 71995158991454144, guid: 7a2ed394dc58f4686b59dcc55b71e01c, type: 3}
       propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 71995158991454144, guid: 7a2ed394dc58f4686b59dcc55b71e01c, type: 3}
+      propertyPath: m_GeometryType
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 71995158991454144, guid: 7a2ed394dc58f4686b59dcc55b71e01c, type: 3}
@@ -11482,7 +11486,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1796940226181103651, guid: 7a2ed394dc58f4686b59dcc55b71e01c, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.25
       objectReference: {fileID: 0}
     - target: {fileID: 1796940226181103651, guid: 7a2ed394dc58f4686b59dcc55b71e01c, type: 3}
       propertyPath: m_LocalPosition.z
