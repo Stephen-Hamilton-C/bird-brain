@@ -101,7 +101,7 @@ public class CharacterController2D : MonoBehaviour
 		{
 
 			// If crouching
-			if (crouch)
+			if (crouch && m_Grounded)
 			{
 				if (!m_wasCrouching)
 				{

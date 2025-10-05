@@ -10,6 +10,4 @@ public class FlyingFloor : MonoBehaviour
     {
         transform.DOMove(_endPoint.position, _flyDuration);
     }
-    
-    
 }

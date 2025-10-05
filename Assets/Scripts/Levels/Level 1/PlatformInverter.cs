@@ -3,25 +3,32 @@ using UnityEngine;
 [RequireComponent(typeof(SpriteRenderer))]
 public class PlatformInverter : MonoBehaviour
 {
-    [SerializeField] private Sprite _groundSprite;
-    [SerializeField] private Sprite _lavaSprite;
+    [SerializeField] private Sprite[] _groundSprites;
+    [SerializeField] private Sprite[] _lavaSprites;
+    [SerializeField] private SpriteRenderer[] _spriteRenderers;
     private KillBox _killBox;
-    private SpriteRenderer _renderer;
 
     private void Start()
     {
+        Debug.Assert(
+            _groundSprites.Length == _lavaSprites.Length && _lavaSprites.Length == _spriteRenderers.Length,
+            "Ground sprites, lava sprites, and sprite renderers must be the same length"
+        );
+        
         _killBox = GetComponent<KillBox>();
         if (!_killBox)
         {
             _killBox = gameObject.AddComponent<KillBox>();
             _killBox.enabled = false;
         }
-        _renderer = GetComponent<SpriteRenderer>();
     }
 
     public void Invert()
     {
         _killBox.enabled = !_killBox.enabled;
-        _renderer.sprite = _killBox.enabled ? _lavaSprite : _groundSprite;
+        for (var i = 0; i < _spriteRenderers.Length; i++)
+        {
+            _spriteRenderers[i].sprite = _killBox.enabled ? _lavaSprites[i] : _groundSprites[i];
+        }
     }
 }
