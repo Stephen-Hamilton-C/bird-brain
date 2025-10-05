@@ -10,6 +10,7 @@ using Random = UnityEngine.Random;
 [RequireComponent(typeof(CharacterController2D))]
 public class Player : MonoBehaviour
 {
+    public Gun Gun;
     private static readonly int Walking = Animator.StringToHash("Walking");
     [SerializeField] private float _minimumY = -11;
     [SerializeField] private Animator _anim;
@@ -49,6 +50,9 @@ public class Player : MonoBehaviour
         
         if(Input.GetButtonDown("Jump"))
             DestroySpring();
+        
+        if(Input.GetButtonDown("Menu"))
+            SceneManager.LoadScene(0);
 
         var isWalking = Mathf.Abs(_controller.Velocity.x) > 0.1f;
         _anim.SetBool(Walking, isWalking);

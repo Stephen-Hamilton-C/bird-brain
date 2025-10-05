@@ -16,4 +16,9 @@ public static class BehaviorExtensions
 
         return player;
     }
+
+    public static bool IsPlayer(this Behaviour behaviour)
+    {
+        return behaviour.CompareTag("Player") || behaviour.CompareTag("PlayerCrouchCollider");
+    }
 }

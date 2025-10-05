@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6242317508617040233}
   - component: {fileID: 1787340887746962881}
   - component: {fileID: 4540241850979782569}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Arrow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -88,7 +88,7 @@ GameObject:
   - component: {fileID: 2004266316785758786}
   - component: {fileID: 7102065512340272753}
   - component: {fileID: 2596198513943810816}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -259,5 +259,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   OnColliderExit:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPlayerEnterTrigger:
     m_PersistentCalls:
       m_Calls: []

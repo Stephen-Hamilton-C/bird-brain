@@ -11,9 +11,14 @@ public class ExternalTrigger : MonoBehaviour
     public UnityEvent<Collision2D> OnColliderStay;
     public UnityEvent<Collision2D> OnColliderExit;
 
+    public UnityEvent<Player> OnPlayerEnterTrigger;
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         OnTriggerEnter?.Invoke(other);
+        var player = other.FindPlayer();
+        if(player)
+            OnPlayerEnterTrigger?.Invoke(player);
     }
 
     private void OnTriggerStay2D(Collider2D other)

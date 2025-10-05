@@ -16,7 +16,8 @@ public class ArrowSpawner : MonoBehaviour
     public void OnTriggerEnter2D(Collider2D other)
     {
         if (!other.FindPlayer()) return;
-        Collider.enabled = false;
+        if(Collider)
+            Collider.enabled = false;
         Spawn();
     }
 }
